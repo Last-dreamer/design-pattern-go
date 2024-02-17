@@ -43,3 +43,54 @@ type Persistance struct {
 func (p *Persistance) SaveToFile(j *Journal, fileName string) {
 	_ = os.WriteFile(fileName, []byte(strings.Join(j.Entries, p.LineSeparator)), 0644)
 }
+
+func MainFunctionCall() {
+
+	//! single responsibility principle
+	// j := Journal{}
+	// j.AddEntry("i wannan to go ")
+	// j.AddEntry("i wannan to go to the mall")
+	// fmt.Println(j.String())
+	//
+	// p := Persistance{LineSeparator: "\n"}
+	// p.SaveToFile(&j, "testing.txt")
+
+	//! open-closed principle
+	apple := Product{
+		Name:  "Apple",
+		Color: green,
+		Size:  small,
+	}
+	house := Product{
+		Name:  "House",
+		Color: blue,
+		Size:  large,
+	}
+	tree := Product{
+		Name:  "Tree",
+		Color: green,
+		Size:  large,
+	}
+
+	products := []Product{apple, house, tree}
+	fmt.Printf("Green Old Products :\n")
+
+	f := Filter{}
+	for _, v := range f.FilterByColor(products, green) {
+		fmt.Printf(" - %s is green\n", v.Name)
+	}
+
+	fmt.Printf("Green Product (New): \n")
+	greenSpec := ColorSpicification{green}
+	bf := BetterFilter{}
+	for _, v := range bf.Filter(products, &greenSpec) {
+		fmt.Printf(" - %s is green\n", v.Name)
+	}
+
+	fmt.Printf("Large Green Product: \n")
+	largeSpec := SizeSpicification{large}
+	lgSpec := AndSpecification{&largeSpec, &greenSpec}
+	for _, v := range bf.Filter(products, &lgSpec) {
+		fmt.Printf(" - %s is green\n", v.Name)
+	}
+}
