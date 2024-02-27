@@ -52,15 +52,19 @@ func MainFunctionCall() {
 
 	//! liskov substitution principle
 
-	rc := &Rectangle{2, 3}
-	UseIt(rc) // 20, 20
+	// rc := &Rectangle{2, 3}
+	// UseIt(rc) // 20, 20
 
-	// beaking the liskov substitution principle
-	sq := NewSquare(5)
-	UseIt(sq) // 20, 50
+	// // beaking the liskov substitution principle
+	// sq := NewSquare(5)
+	// UseIt(sq) // 20, 50
 
-	// frist solution
-	sq2 := &Square2{5}
-	UseIt(sq2.Rectangle()) // 50, 50
+	// // frist solution
+	// sq2 := &Square2{5}
+	// UseIt(sq2.Rectangle()) // 50, 50
+
+	//! interface segregation principle
+	// ofp := OldFunctionPrinter{}
+	// ofp.Scan()
 
 }
