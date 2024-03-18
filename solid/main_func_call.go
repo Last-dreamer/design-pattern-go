@@ -55,7 +55,7 @@ func MainFunctionCall() {
 	// rc := &Rectangle{2, 3}
 	// UseIt(rc) // 20, 20
 
-	// // beaking the liskov substitution principle
+	// breaking the liskov substitution principle
 	// sq := NewSquare(5)
 	// UseIt(sq) // 20, 50
 

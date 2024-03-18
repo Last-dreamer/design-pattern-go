@@ -43,6 +43,7 @@ func UseIt(sized Sized) {
 
 }
 
+// a problem here ... the principle broke here
 type Square struct {
 	Rectangle
 }
@@ -64,8 +65,7 @@ func (s *Square) SetHeight(height int) {
 	s.width = height
 }
 
-// frist approach
-
+// frist approach to solve
 type Square2 struct {
 	size int // width, height
 }

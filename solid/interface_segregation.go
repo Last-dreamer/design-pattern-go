@@ -78,6 +78,7 @@ type MultiFunctionMachine struct {
 func (m MultiFunctionMachine) Print(d Documents) {
 	m.Printer.Print(d)
 }
+
 func (m MultiFunctionMachine) Scan(d Documents) {
 	m.Scanner.Scan(d)
 }
