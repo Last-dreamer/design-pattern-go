@@ -4,7 +4,7 @@ import "design-pattern-go/solid"
 
 func main() {
 
-	// single responsibility principle
+	//  all solid function
 	solid.MainFunctionCall()
 
 }

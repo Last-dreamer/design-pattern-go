@@ -28,13 +28,13 @@ func (j *Journal) RemoveEntry(position int) {
 	// ...
 }
 
+// sepation of concerns
+var lineSeperator = "\n"
+
 func Save(j *Journal, fileName string) {
 	// 0644 permission for file
 	_ = os.WriteFile(fileName, []byte(strings.Join(j.Entries, lineSeperator)), 0644)
 }
-
-// sepation of concerns
-var lineSeperator = "\n"
 
 type Persistance struct {
 	LineSeparator string

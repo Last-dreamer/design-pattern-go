@@ -1,6 +1,9 @@
 package solid
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 // Liskov Substitutions Principle
 // named after barbara liskov principle
@@ -35,11 +38,17 @@ func (r *Rectangle) SetHeight(height int) {
 
 func UseIt(sized Sized) {
 	width := sized.GetWidth()
+	log.Println("testing width:", width)
 	sized.SetHeight(10)
 	expectedArea := 10 * width
 	actualArea := sized.GetHeight() * sized.GetWidth()
 
 	fmt.Println("Expected area: ", expectedArea, "\n ", ", but got: ", actualArea)
+	if expectedArea != actualArea {
+		log.Println("ops, it broke the liskov substiution principle")
+	} else {
+		log.Println("it's statify the liskov substiution principle")
+	}
 
 }
 

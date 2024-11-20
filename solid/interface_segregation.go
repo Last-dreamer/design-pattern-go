@@ -1,5 +1,9 @@
 package solid
 
+import (
+	"log"
+)
+
 type Documents struct{}
 
 type Machine interface {
@@ -8,8 +12,7 @@ type Machine interface {
 	Scan(d Documents)
 }
 
-type MultiFunctionPrinter struct {
-}
+type MultiFunctionPrinter struct{}
 
 func (m MultiFunctionPrinter) Print(d Documents) {
 	panic("not implemented") // TODO: Implement
@@ -20,7 +23,8 @@ func (m MultiFunctionPrinter) Fax(d Documents) {
 }
 
 func (m MultiFunctionPrinter) Scan(d Documents) {
-	panic("not implemented") // TODO: Implement
+	log.Println("scaning.......")
+	// panic("not implemented") // TODO: Implement
 }
 
 type OldFunctionPrinter struct{}
@@ -29,7 +33,7 @@ func (o OldFunctionPrinter) Print(d Documents) {
 	panic("not implemented") // TODO: Implement
 }
 
-// Defrecated: ...
+// Defricated: ...
 func (o OldFunctionPrinter) Fax(d Documents) {
 	panic("operation no supported yet")
 }
@@ -58,7 +62,9 @@ func (m MyPrinter) Print(d Documents) {}
 type PhotoCopier struct{}
 
 func (p PhotoCopier) Print(d Documents) {}
-func (p PhotoCopier) Scan(d Documents)  {}
+func (p PhotoCopier) Scan(d Documents) {
+	log.Println("testing scanning interface ..")
+}
 
 //  to compose more interfaces into one
 
@@ -71,14 +77,18 @@ type MulitFunctionDevice interface {
 
 // decorator pattern
 type MultiFunctionMachine struct {
-	Printer Printer
-	Scanner Scanner
+	printer Printer
+	scanner Scanner
+	// may be other interfaces also
 }
 
 func (m MultiFunctionMachine) Print(d Documents) {
-	m.Printer.Print(d)
+	m.printer.Print(d)
 }
 
 func (m MultiFunctionMachine) Scan(d Documents) {
-	m.Scanner.Scan(d)
+	// log.Println("tesitng if working or not ")
+	m.scanner.Scan(d)
+	// fmt.Printf("m.Scanner: just scanning .. %v\n", m.Scanner)
+
 }
