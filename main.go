@@ -1,10 +1,13 @@
 package main
 
-import "design-pattern-go/solid"
+import designpatterns "design-pattern-go/design_patterns"
 
 func main() {
 
 	//  all solid function
-	solid.MainFunctionCall()
+	// solid.MainFunctionCall()
+
+	// builder pattern
+	designpatterns.DemonstrationOfBuilderPattern()
 
 }
