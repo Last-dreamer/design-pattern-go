@@ -22,7 +22,7 @@ func (e *HtmlElement) String() string {
 func (e *HtmlElement) string(indent int) string {
 	sb := strings.Builder{}
 	i := strings.Repeat(" ", indentSize*indent)
-	sb.WriteString(fmt.Sprintf("%d<%s>\n",
+	sb.WriteString(fmt.Sprintf("%s<%s>\n",
 		i, e.name))
 	if len(e.text) > 0 {
 		sb.WriteString(strings.Repeat(" ",
@@ -34,7 +34,48 @@ func (e *HtmlElement) string(indent int) string {
 	for _, el := range e.elements {
 		sb.WriteString(el.string(indent + 1))
 	}
+	sb.WriteString(fmt.Sprintf("%s</%s>\n", i, e.name))
+
 	return sb.String()
+}
+
+func (b *HtmlBuilder) AddChild(childName, childText string) {
+	e := HtmlElement{
+		name:     childName,
+		text:     childText,
+		elements: []HtmlElement{},
+	}
+	b.root.elements = append(b.root.elements, e)
+}
+
+func (b *HtmlBuilder) AddChildFluent(childName, childText string) *HtmlBuilder {
+	e := HtmlElement{
+		name:     childName,
+		text:     childText,
+		elements: []HtmlElement{},
+	}
+	b.root.elements = append(b.root.elements, e)
+	return b
+}
+
+type HtmlBuilder struct {
+	rootName string
+	root     HtmlElement
+}
+
+func NewHtmlBuilder(rootName string) *HtmlBuilder {
+	return &HtmlBuilder{
+		rootName: rootName,
+		root: HtmlElement{
+			name:     rootName,
+			text:     "",
+			elements: []HtmlElement{},
+		},
+	}
+}
+
+func (b *HtmlBuilder) String() string {
+	return b.root.String()
 }
 
 func DemonstrationOfBuilderPattern() {
@@ -58,5 +99,12 @@ func DemonstrationOfBuilderPattern() {
 	}
 	sb.WriteString("</ul>")
 	log.Println(sb.String())
+
+	// checking the actual builder pattern
+	b := NewHtmlBuilder("ul")
+	b.AddChildFluent("li", "hello").
+		AddChildFluent("li", "word")
+
+	log.Println("builder pattern:", b.String())
 
 }
